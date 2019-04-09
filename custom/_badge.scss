@@ -1,0 +1,48 @@
+
+/*Extending the base class*/
+
+.badge{
+  display: inline-block;
+  padding:rem(4px) rem(8px);
+  font-size:rem(16px);
+  white-space: nowrap;
+  border:rem(1px) solid transparent;
+  background-color:transparent;
+  @include border-radius(rem(2px));
+  margin-bottom: rem(2px);
+  @at-root a#{&}{
+    text-decoration: none;
+  }
+  &-wide{
+    padding: rem(4px) rem(16px);
+  }
+  &-pill{
+    @include border-radius(rem(200px));
+  }
+}
+
+/*sizes*/
+
+
+
+/*badge colors*/
+@each $colorName,$colorValue in $colorsList{
+  .badge{
+    &-#{$colorName}{
+      @include badge-variant($colorValue);
+    }
+    &-outline-#{$colorName}{
+      color:$colorValue;
+      border-color:$colorValue;
+      @at-root a#{&}{
+       @include hover-focus{
+          border-color:darken($colorValue,10%);
+          color:color-yiq($colorValue);
+          outline:0;
+          background-color: darken($colorValue,10%);
+          box-shadow:0 0 0 rem(2px) rgba($colorValue,0.5);
+       }
+      }
+    }
+  }
+}
