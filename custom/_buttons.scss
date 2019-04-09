@@ -1,0 +1,70 @@
+/*Component*/
+// /*Over ride the base styles*/
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: rem(8px);
+  background-color: transparent;
+  border: rem(1px) solid transparent;
+  /*
+  button-size(padding-y,padding-x,font-size,line-height,border-radius
+  */
+  @include button-size(rem(8px), rem(16px), rem(16px), rem(16px), rem(0px));
+  @include border-radius(rem(2px));
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225);
+
+  /*hover states*/
+
+  &:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.225);
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  /* focus states */
+  &:focus,
+  &.focus {
+    outline: 0;
+    box-shadow: rem(0px) rem(0px) rem(4px)
+      rgba(map-get($colorsList, black), 0.225);
+  }
+
+  /* disabled states*/
+  &:disabled,
+  &.disabled {
+    @include box-shadow(none);
+    opacity: 0.4;
+  }
+}
+
+
+/* Button Colors */
+@each $colorName, $colorValue in $theme-colors {
+  .btn-#{$colorName} {
+    @include button-variant($colorValue, $colorValue);
+  }
+  .btn-outline-#{$colorName} {
+    @include button-outline-variant($colorValue);
+  }
+}
+
+/* button sizes */
+
+.btn-lg-2 {
+  @include button-size(rem(24px), rem(40px), rem(32px), rem(24px), rem(0px));
+}
+
+.btn-lg {
+  @include button-size(rem(16px), rem(32px), rem(24px), rem(16px), rem(0px));
+}
+
+.btn-sm {
+  @include button-size(rem(4px), rem(8px), rem(14px), rem(16px), rem(0px));
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
