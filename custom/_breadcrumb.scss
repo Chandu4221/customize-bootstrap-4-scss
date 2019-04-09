@@ -1,0 +1,60 @@
+$breadcrumb-divider:quote(">");
+
+.breadcrumb{
+display: flex;
+flex-wrap: wrap;
+padding: rem(16px);
+margin:0;
+margin-bottom: rem(8px);
+list-style: none;
+@include border-radius(rem(2px));
+background-color:transparent;
+border:rem(1px) solid transparent;
+  a{
+    text-decoration:none;
+    color:color-yiq(map-get($colorsList,white));
+  }
+}
+
+.breadcrumb-item{
+  + #{&}{
+    padding-left:rem(8px);
+    &::before{
+      display:inline-block;
+      padding-right:rem(8px);
+      content:$breadcrumb-divider;
+    }
+  }
+}
+
+
+@each $colorName,$colorValue in $theme-colors{
+  .breadcrumb{
+    &-#{$colorName}{
+    background-color:$colorValue;
+    color:color-yiq($colorValue);
+      a{
+        color:color-yiq($colorValue);
+      }
+      .breadcrumb-item{
+        &.active,
+        &.active a{
+         color:theme-color-level($colorName,6);
+        }
+      }
+    }
+    &-outline-#{$colorName}{
+      border-color:$colorValue;
+      color:$colorValue;
+      a{
+        color:$colorValue;
+      }
+      .breadcrumb-item{
+        &.active,
+        &.active a{
+          color:theme-color-level($colorName,6);
+        }
+      }
+    }
+  }
+}
