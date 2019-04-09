@@ -1,0 +1,102 @@
+.alert {
+  position: relative;
+  padding: rem(16px);
+  margin-bottom: rem(8px);
+  border-radius: rem(2px);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.225);
+  /*horizontal rule*/
+  hr {
+    border: none;
+    border-top: rem(1px) solid transparent;
+    margin: rem(8px) auto;
+  }
+  /*alert headings*/
+  &-heading {
+    margin-top: 0;
+    margin-bottom: 0px;
+    padding-bottom: rem(4px);
+    font-weight: 600;
+  }
+  /*dismissable alert*/
+  &-dismissable {
+    padding-right: rem(32px);
+    .close {
+      position: absolute;
+      top: rem(6px);
+      right: rem(6px);
+      margin: auto;
+      background-color: transparent;
+      border: none;
+      outline: 0;
+      font-size: rem(24px);
+      line-height: rem(24px);
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  /*anchors inside the alert*/
+  &-link {
+    font-weight: 600;
+    text-decoration: none;
+  }
+  /*Outline Alerts*/
+  &-outline {
+    box-sizing: border-box;
+    background-color: map-get($theme-colors, white);
+    border: rem(2px) solid darken(map-get($theme-colors, white), 10%);
+  }
+  &-callout {
+    border: rem(1px) solid transparent;
+    border-left-width: rem(8px);
+    background-color: map-get($theme-colors, white);
+  }
+  &-icon {
+    padding-left: rem(48px);
+    .ico {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      width: rem(48px);
+      height: rem(48px);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+@each $colorName, $colorValue in $colorsList {
+  .alert-#{$colorName} {
+    background-color: #{$colorValue};
+    color: color-yiq($colorValue);
+    hr {
+      border-color: darken($colorValue, 20%);
+    }
+    .alert-link {
+      color: darken($colorValue, 40%);
+    }
+    .alert-heading {
+      color: color-yiq($colorValue);
+    }
+    /* close icon */
+    .close {
+      color: color-yiq($colorValue);
+    }
+  }
+  /* Create Outline Alerts */
+
+  .alert-outline-#{$colorName} {
+    border-color: $colorValue;
+    color: $colorValue;
+    hr {
+      border-color: lighten($colorValue, 20%);
+    }
+  }
+  .alert-callout-#{$colorName} {
+    border-color: #{$colorValue};
+    color: darken($colorValue, 10%);
+  }
+}
